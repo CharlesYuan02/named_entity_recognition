@@ -13,10 +13,10 @@ spacy==3.2.0
 ## Results
 
 ### Before Training
-<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/untrained_result.PNG">
+<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/86_untrained_result.PNG">
 
 ### After Training
-<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/trained_result.PNG">
+<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/86_trained_result.PNG">
 
 ## Acknowledgements
 * Shrivarsheni, for writing this <a href="https://www.machinelearningplus.com/nlp/training-custom-ner-model-in-spacy/">article</a> on the basics of training Spacy NER models
