@@ -107,7 +107,7 @@ if __name__ == "__main__":
     # This is model training 101 (a.k.a. bias manipulation)
 
     # Now let's save this model
-    output_dir=Path("C:\\Users\\charl\\Desktop\\named_entity_recognition\\model\\")
+    output_dir=Path("C:\\Users\\charl\\Desktop\\named_entity_recognition\\86_model\\")
     if not output_dir.exists():
         output_dir.mkdir()
     nlp.meta["name"] = "eighty_six_ner" # Feel free to name this anything you want
