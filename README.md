@@ -3,6 +3,8 @@ Earlier today, I was browsing through the list of Thesis Projects from past four
 
 ## Prerequisites
 
+Remember to unzip the model folder!
+
 ```
 python==3.8.0
 spacy==3.2.0
