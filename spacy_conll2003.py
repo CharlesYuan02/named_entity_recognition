@@ -4,8 +4,8 @@ import spacy
 from datasets import load_dataset
 from pathlib import Path
 from spacy import displacy
-from spacy.util import minibatch, compounding
 from spacy.training.example import Example 
+from spacy.util import minibatch, compounding
 
 
 def export_to_file(export_file_path, data):
@@ -104,6 +104,15 @@ def train_ner(train_data, ner):
                 print(f"Losses: {losses}")
 
 
+def evaluate(nlp, val_data, ents):
+    scorer = Scorer()
+    for input_, annotations in val_data:
+        doc_gold_text = nlp.make_doc(input_)
+        gold = GoldParse(doc_gold_text, entities=ents)
+        pred_value = nlp(input_)
+        scorer.score(pred_value, gold)
+    return scorer.scores
+
 if __name__ == "__main__":
     # Since we're training from scratch, make sure this is not a pretrained model!
     nlp = spacy.blank('en')
@@ -113,7 +122,7 @@ if __name__ == "__main__":
 
     conll_data = load_dataset("conll2003")
 
-    # Create training/validation data (validation is only needed for transformer later)
+    # Create training/validation data
     if not os.path.exists("data"):
         os.mkdir("data")
         export_to_file("./data/conll_train.txt", conll_data["train"])
@@ -186,6 +195,34 @@ if __name__ == "__main__":
     # As you can see, the model is now able to perform named entity recognition!
     # Note that with enough examples, it can even do this on custom labels like the ones we added.
 
+    # Last thing, let's evaluate its accuracy using the validation data!
+    # First let's create the validation set
+    val_dir = "data/conll_val.txt"
+    val_data = []
+
+    with open(val_dir, "r") as val_file:
+        lines = val_file.readlines()
+        for i in range(len(lines)):
+            record = lines[i]
+            record = record.split(sep="\t")
+            length = int(record[0])
+            tokens = record[1:length+1]
+            tags = record[length+1: ]
+            tags = [int(tag)+1 for tag in tags]
+            text = " ".join(record[1:length+1])
+            val_data.append(create_train_data(text, tokens, tags, lookup_table))
+    
+    # But the evaluate() method needs the data in the form of Example objects
+    val_examples = []
+    for text, annotations in val_data:
+        val_doc = nlp_test.make_doc(text)
+        example = Example.from_dict(val_doc, annotations)
+        val_examples.append(example)
+    
+    # Now let's obtain the training scores
+    scores = nlp.evaluate(val_examples)
+    print(f"Precision: {scores['ents_p']} \nRecall: {scores['ents_r']} \nF1 Score: {scores['ents_f']}")
+    
     # You can visualize the final results in a nicer format
     # Let's add some custom colours while we're at it
     # To see it, open up "http://localhost:5000/"
