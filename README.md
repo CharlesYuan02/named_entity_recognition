@@ -21,6 +21,10 @@ spacy==3.2.0
 
 ## Results, Training From Scratch with CoNLL-2003 Dataset
 
+#### Precision: 46.2%
+#### Recall: 51.7%
+#### F1 Score: 48.8%
+
 ### Before Training
 <img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/spacy_untrained_result.PNG">
 
