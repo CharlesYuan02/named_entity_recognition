@@ -45,7 +45,7 @@ spacy==3.2.0
 
 <img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/transformer_trained_result.PNG">
 
-<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/ground_truth.PNG>
+<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/ground_truth.PNG">
 
 ## Notes
 * There is a weird bug with Spacy, where you can train, save, and load your model just fine.
