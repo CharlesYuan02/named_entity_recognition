@@ -87,8 +87,7 @@ def train_ner(train_data, ner):
             ner.add_label(entity[2])
     
     # Disable other pipeline components which shouldn't be affected
-    trained_components = ["ner", "trf_wordpiecer", "trf_tok2vec"]
-    unaffected_pipes = [pipe for pipe in nlp.pipe_names if pipe not in trained_components]
+    unaffected_pipes = [pipe for pipe in nlp.pipe_names if pipe != "ner"]
 
     with nlp.disable_pipes(*unaffected_pipes):
         for iter in range(2): # Since it's a lot of data (14k), train for only 2 iterations
@@ -107,7 +106,8 @@ def train_ner(train_data, ner):
 
 if __name__ == "__main__":
     # Since we're training from scratch, make sure this is not a pretrained model!
-    nlp=spacy.blank('en')
+    nlp = spacy.blank('en')
+    ner = nlp.create_pipe("ner")
     nlp.add_pipe("ner")
     nlp.initialize()
 
@@ -141,7 +141,6 @@ if __name__ == "__main__":
     # As you can see, the untrained model obviously doesn't detect anything.
     # So now let's actually train it, shall we?    
 
-    ner = nlp.get_pipe("ner")
     train_dir = "data/conll_train.txt"
     train_data = []
     
@@ -168,7 +167,7 @@ if __name__ == "__main__":
     train_ner(train_data, ner)
 
     # Now let's save this model
-    output_dir=Path("C:\\Users\\charl\\Desktop\\named_entity_recognition\\spacy_model\\")
+    output_dir = Path("C:\\Users\\charl\\Desktop\\named_entity_recognition\\spacy_model\\")
     if not output_dir.exists():
         output_dir.mkdir()
     nlp.meta["name"] = "conll2003_spacy" # Feel free to name this anything you want
@@ -177,8 +176,8 @@ if __name__ == "__main__":
 
     # Now let's load this model and see if it still works
     nlp_test = spacy.load(output_dir)
-    move_names = list(ner.move_names)
-    assert nlp_test.get_pipe("ner").move_names == move_names
+    # print(nlp_test.pipe_names)
+    ner = nlp_test.get_pipe("ner")
     test_doc = nlp_test(example)
     print("\nAfter Training: ")
     for entity in test_doc.ents:
@@ -188,5 +187,16 @@ if __name__ == "__main__":
     # Note that with enough examples, it can even do this on custom labels like the ones we added.
 
     # You can visualize the final results in a nicer format
+    # Let's add some custom colours while we're at it
     # To see it, open up "http://localhost:5000/"
-    displacy.serve(test_doc, style='ent')
+    colors = {"B-PER": "#FF6D6D", # Red
+              "I-PER": "#FF6D6D",
+              "B-ORG": "#FFB454", # Orange
+              "I-ORG": "#FFB454",
+              "B-LOC": "#81FF4A", # Green 
+              "I-LOC": "#81FF4A",
+              "B-MISC": "#4ABDFF", # Blue
+              "I-MISC": "#4ABDFF"}
+    options = {"ents": ["B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC", "B-MISC", "I-MISC"], "colors": colors}
+
+    displacy.serve(test_doc, style='ent', options=options)
