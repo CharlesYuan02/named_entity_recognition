@@ -17,7 +17,7 @@ spacy==3.2.0
 
 <a href="https://huggingface.co/datasets/conll2003">CoNLL-2003</a>
 
-## Results, with Pretrained Model
+## Results, with Pretrained Model and Custom Examples
 
 ### Before Training
 <img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/86_untrained_result.PNG">
