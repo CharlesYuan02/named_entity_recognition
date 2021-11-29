@@ -16,7 +16,7 @@ spacy==3.2.0
 ```
 ## Dataset
 
-<a href="https://huggingface.co/datasets/conll2003">CoNLL-2003</a>
+The dataset I used was <a href="https://huggingface.co/datasets/conll2003">CoNLL-2003</a>, a named entity recognition dataset released as a part of CoNLL-2003 shared task: language-independent named entity recognition. The data was taken from the Reuters Corpus, which consists of Reuters news stories between August 1996 and August 1997.
 
 ## Results, with Pretrained Model and Custom Examples
 
