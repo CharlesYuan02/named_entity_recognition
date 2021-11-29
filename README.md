@@ -20,10 +20,10 @@ spacy==3.2.0
 ## Results, with Pretrained Model and Custom Examples
 
 ### Before Training
-<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/86_untrained_result.PNG">
+<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/results/86_untrained_result.PNG">
 
 ### After Training
-<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/86_trained_result.PNG">
+<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/results/86_trained_result.PNG">
 
 ## Results, Training From Scratch with CoNLL-2003 Dataset
 
@@ -32,10 +32,10 @@ spacy==3.2.0
 #### F1 Score: 48.8% 
 
 ### Before Training
-<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/spacy_untrained_result.PNG">
+<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/results/spacy_untrained_result.PNG">
 
 ### After Training
-<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/spacy_trained_result.PNG">
+<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/results/spacy_trained_result.PNG">
 
 ## Results, Transformer Model with CoNLL-2003 Dataset
 
@@ -43,9 +43,9 @@ spacy==3.2.0
 #### Recall: 65.58%
 #### F1 Score: 67.26%
 
-<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/transformer_trained_result.PNG">
+<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/results/transformer_trained_result.PNG">
 
-<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/ground_truth.PNG">
+<img src="https://github.com/Chubbyman2/named_entity_recognition/blob/main/results/ground_truth.PNG">
 
 ## Notes
 * There is a weird bug with Spacy, where you can train, save, and load your model just fine.
